@@ -62,14 +62,13 @@ body {
   font-weight: 600;
   font-size: 16px;
 }
-#fromAmount {
+#fromAmount, #toAmount {
   font-size: 32px;
   font-weight: 600;
+  width: 200px;
 }
 
 #toAmount {
-  font-size: 32px;
-  font-weight: 600;
   cursor: default;
 }
 
