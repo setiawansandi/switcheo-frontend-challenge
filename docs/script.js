@@ -380,7 +380,7 @@ transferButton.addEventListener("click", () => {
   const tempValue = fromAmountInput.value;
 
   // Swap the values
-  fromAmountInput.value = toAmountInput.value;
+  fromAmountInput.value = parseFloat(toAmountInput.value) == 0 ? "" : toAmountInput.value;
   toAmountInput.value = tempValue;
 
   validateAmount(fromAmountInput, fromBalanceSpan);
@@ -390,7 +390,7 @@ transferButton.addEventListener("click", () => {
 function validateAmount(inputElement, balanceElement) {
   const value = inputElement.value;
 
-  if(value == "") {
+  if(value == "" || parseFloat(value) == '0') {
     // Disable the "Preview Swap" button
     previewButton.disabled = true;
     previewButton.classList.add("disabled-button");
