@@ -1,0 +1,166 @@
+<html>
+  <head>
+    <title>Fancy Form</title>
+
+    <!-- You may add more stuff here -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/coin-modal.css" rel="stylesheet" />
+    <link href="css/confirmation-modal.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- You may reorganise the whole HTML, as long as your form achieves the same effect. -->
+    <form class="swap-container" id="swapForm">
+      <div class="swap-header">
+        <button type="button" class="active-tab">Swap</button>
+      </div>
+
+      <div class="flex-container">
+        <div class="swap-box">
+          <div class="swap-row">
+            <div class="flex-container">
+              <label for="fromAmount" class="from-label">From</label>
+              <button type="button" class="coin-button" id="fromCoinButton">
+                <img
+                  src="https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/ETH.svg"
+                  class="coin-icon"
+                />
+                <span>ETH</span>
+              </button>
+            </div>
+            <div class="input-group">
+              <input
+                type="text"
+                id="fromAmount"
+                name="fromAmount"
+                placeholder="0.00"
+                required
+              />
+            </div>
+            <div class="balance">
+              Balance: <span id="fromBalance">6531.53 ETH</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Transfer Button -->
+        <div class="transfer-container">
+          <button class="transfer-button" type="button">
+            <img src="assets/transfer-icon.svg" alt="Transfer" />
+          </button>
+        </div>
+
+        <div class="swap-box">
+          <div class="swap-row">
+            <div class="flex-container">
+              <label for="fromAmount" class="from-label">To</label>
+              <button type="button" class="coin-button" id="toCoinButton">
+                <img
+                  src="https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/USD.svg"
+                  class="coin-icon"
+                />
+                <span>USD</span>
+              </button>
+            </div>
+            <div class="input-group">
+              <input
+                type="text"
+                id="toAmount"
+                class="disabled"
+                name="toAmount"
+                placeholder="0.00"
+                readonly
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="swap-footer">
+        <!-- Exchange Rate Information -->
+        <div class="exchange-rate">
+          <img
+            src="assets/exclamation-icon.svg"
+            alt="❗"
+            class="exclamation-icon"
+          />
+          <span>1 ETH = 0.035 BTC</span>
+        </div>
+
+        <!-- Preview Swap Button -->
+        <button type="button" class="preview-button disabled-button">Swap</button>
+      </div>
+
+      <!-- Details Section (Initially Hidden) -->
+      <div
+        class="details-container"
+        id="detailsContainer"
+        style="display: none"
+      >
+        <ul>
+          <li>Price:<span id="confirm-price-span">1 ETH = 0.035 BTC</span></li>
+          <li>Network Fees:<strong>$3.50</strong></li>
+          <li>Price Impact:<strong>-0.15%</strong></li>
+          <li>Slippage Tolerance:<strong>0.5%</strong></li>
+        </ul>
+
+        <button type="button" class="confirm-button">Confirm Swap</button>
+      </div>
+    </form>
+
+    <!-- Coin Selection Modal -->
+    <div id="coinModal" class="modal">
+      <div class="modal-content">
+        <button class="close-button" id="closeModal">&times;</button>
+        <h3>Select a Coin</h3>
+        <input type="text" id="searchCoin" placeholder="Search for a coin..." />
+        <ul class="coin-list" id="coinList"></ul>
+      </div>
+    </div>
+
+    <!-- Confirmation Swap -->
+    <div
+      id="swapConfirmationContainer"
+      class="swap-confirmation"
+      style="display: none"
+    >
+      <div class="confirmation-content">
+        <div class="loading-spinner"></div>
+        <h3>Swapping...</h3>
+        <div class="confirmation-coin-row">
+          <img
+            src=""
+            id="modal-from-coin-icon"
+            class="modal-loading-icon"
+            alt="From Coin Icon"
+          />
+          <span id="modal-from-coin-amount">0.00</span>
+          <span id="modal-from-coin-name">ETH</span>
+          <img src="assets/right-arrow.svg" class="modal-loading-icon" />
+          <img
+            src=""
+            id="modal-to-coin-icon"
+            class="modal-loading-icon"
+            alt="To Coin Icon"
+          />
+          <span id="modal-to-coin-amount">0.00</span>
+          <span id="modal-to-coin-name">BTC</span>
+        </div>
+      </div>
+
+      <div class="success-message" id="successMessage">
+        <div class="success-icon"></div>
+        <h3>Swap success!</h3>
+        <a onclick="location.reload(); return false;" id="explorerLink">Go back</a>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
