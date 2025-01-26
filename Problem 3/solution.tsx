@@ -2,8 +2,10 @@
 // 2. 'Datasource' should fetch proces from the url + error handling
 // 3. getPriority function can be declared outside since it does not use any states
 // 4. unused variable 'lhsPriority' is not defined, simplified logic for 'sortedBalances'
-// 5. remove 'prices' dependancy as 'prices' are not directly used for sorting
+// 5. remove 'prices' dependancy as 'prices' are not directly used for sorting. (to avoid unnecessary recomputation)
 // 6. use 'formattedBalances' to generate the <WalletRow>
+// 7. (line 70) "console.err" is a typo. It should be "console.error"
+// 8. using 'index' as the key in <WalletRow> may cause bugs where react may incorrectly render the elements
 
 interface WalletBalance {
   currency: string;
@@ -66,7 +68,7 @@ const WalletPage: React.FC<Props> = (props: Props) => {
         setPrices(prices);
       })
       .catch((error) => {
-        console.err(error);
+        console.error(error);
       });
   }, []);
 
@@ -96,7 +98,7 @@ const WalletPage: React.FC<Props> = (props: Props) => {
       return (
         <WalletRow
           className={classes.row}
-          key={index}
+          key={balance.currency} // using currency as identifier instead of index
           amount={balance.amount}
           usdValue={usdValue}
           formattedAmount={balance.formatted}
